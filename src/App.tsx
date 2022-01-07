@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider } from 'styled-components';
+
+import DogAPIClient from 'api/DogAPI/DogAPIClient';
+import DogAPIClientProvider from 'api/DogAPI/DogAPIClientProvider';
+import { Main } from 'components/Main';
+import Navbar from 'components/Navbar';
+import { GlobalStyle } from 'theme/globalStyles';
+import { theme } from 'theme/theme';
+import DogsList from 'views/DogsList';
+
+const queryClient = new QueryClient();
+const dogApiClient = new DogAPIClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <DogAPIClientProvider client={dogApiClient}>
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
+          <Main>
+            <DogsList />
+          </Main>
+        </QueryClientProvider>
+      </DogAPIClientProvider>
+    </ThemeProvider>
   );
 }
 
