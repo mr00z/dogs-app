@@ -16,26 +16,33 @@ export const PrimaryButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.primary};
   border-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.background};
-  &:hover {
-    background-color: ${(props) => lighten(LIGHTEN_PERCENTAGE, props.theme.colors.primary)};
-    border-color: ${(props) => lighten(LIGHTEN_PERCENTAGE, props.theme.colors.primary)};
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => lighten(LIGHTEN_PERCENTAGE, props.theme.colors.primary)};
+      border-color: ${(props) => lighten(LIGHTEN_PERCENTAGE, props.theme.colors.primary)};
+    }
   }
 `;
 
 export const SecondaryButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.secondary};
   border-color: ${(props) => props.theme.colors.secondary};
-  &:hover {
-    background-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.secondary)};
-    border-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.secondary)};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.secondary)};
+      border-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.secondary)};
+    }
   }
 `;
 
 export const TertiaryButton = styled(Button)`
   background-color: ${(props) => props.theme.colors.tertiary};
   border-color: ${(props) => props.theme.colors.tertiary};
-  &:hover {
-    background-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.tertiary)};
-    border-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.tertiary)};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.tertiary)};
+      border-color: ${(props) => darken(LIGHTEN_PERCENTAGE, props.theme.colors.tertiary)};
+    }
   }
 `;
