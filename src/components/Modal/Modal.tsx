@@ -28,9 +28,14 @@ Modal.Header = styled.div`
 
 Modal.Content = styled.div`
   background-color: ${(props) => props.theme.colors.white};
-  margin: 25vh auto;
+  margin: 15vh auto;
   border-radius: 10px;
   width: 70vw;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    margin: 20vh auto;
+    width: 90vw;
+  }
 `;
 
 Modal.Body = styled.div`

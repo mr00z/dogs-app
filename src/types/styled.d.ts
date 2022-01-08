@@ -13,5 +13,11 @@ declare module 'styled-components' {
       black: string;
     };
     typography: Partial<TypographyProps>;
+    breakpoints: {
+      mobile: string;
+      tablet: string;
+      laptop: string;
+      desktop: string;
+    };
   }
 }

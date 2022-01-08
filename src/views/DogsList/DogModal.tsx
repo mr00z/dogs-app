@@ -2,7 +2,7 @@ import { Heading } from 'styled-typography';
 
 import { useGetBreedImageQuery } from 'api/DogAPI/GetBreedImage';
 import { ButtonGroup, PrimaryButton, SecondaryButton } from 'components/Button';
-import { Container, FullHeightContainer } from 'components/Containers';
+import { Container, FullHeightContainer } from 'components/Container';
 import { Modal, IModal } from 'components/Modal';
 
 import DogImage from './DogImage';

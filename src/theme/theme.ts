@@ -2,6 +2,7 @@ import { DefaultTheme } from 'styled-components';
 
 import { BACKGROUND, BACKGROUND_SECONDARY, BLACK, PRIMARY, SECONDARY, TERTIARY, WHITE } from './colors';
 import { typography } from './typography';
+import { breakpoints } from './breakpoints';
 
 export const theme: DefaultTheme = {
   colors: {
@@ -14,4 +15,5 @@ export const theme: DefaultTheme = {
     white: WHITE,
   },
   typography,
+  breakpoints,
 };

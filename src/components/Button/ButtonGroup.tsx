@@ -7,7 +7,7 @@ const ButtonGroup = styled.div`
     }
   }
 
-  @media (max-width: 844px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     > button {
       width: 100%;
 
