@@ -1,4 +1,5 @@
 import styled, { DefaultTheme, StyledComponent } from 'styled-components';
+
 import { IModal } from '.';
 
 interface ModalBody {

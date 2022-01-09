@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+
 import IDogAPIClient from './IDogAPIClient';
 
 export const DogsAPIClientContext = createContext({} as IDogAPIClient);
