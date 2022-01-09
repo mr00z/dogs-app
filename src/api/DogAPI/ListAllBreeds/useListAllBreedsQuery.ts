@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
+
 import { DogsAPIClientContext } from '../DogAPIClientProvider';
 
 export default function useListAllBreedsQuery() {

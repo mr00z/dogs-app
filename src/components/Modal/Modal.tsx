@@ -1,14 +1,19 @@
 import styled, { DefaultTheme, StyledComponent } from 'styled-components';
 import { IModal } from '.';
 
+interface ModalBody {
+  messageTextOnly?: boolean;
+  loading?: boolean;
+}
+
 type ModalDiv = StyledComponent<'div', DefaultTheme, IModal, never> & {
-  Header?: any;
-  Content?: any;
-  Body?: any;
-  Footer?: any;
+  Header: StyledComponent<'div', DefaultTheme, {}, never>;
+  Content: StyledComponent<'div', DefaultTheme, {}, never>;
+  Body: StyledComponent<'div', DefaultTheme, ModalBody, never>;
+  Footer: StyledComponent<'div', DefaultTheme, {}, never>;
 };
 
-const Modal: ModalDiv = styled.div<IModal>`
+const Modal: Partial<ModalDiv> = styled.div<IModal>`
   display: ${(props) => (props.open ? 'block' : 'none')};
   position: fixed;
   z-index: 1;
@@ -31,6 +36,7 @@ Modal.Content = styled.div`
   margin: 15vh auto;
   border-radius: 10px;
   width: 70vw;
+  min-height: 30vh;
 
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     margin: 20vh auto;
@@ -38,8 +44,14 @@ Modal.Content = styled.div`
   }
 `;
 
-Modal.Body = styled.div`
+Modal.Body = styled.div<ModalBody>`
   padding: 0.75rem 0;
+  height: ${(props) => {
+    if (props.loading) return '30vh';
+    if (props.messageTextOnly) return '30vh';
+
+    return undefined;
+  }};
 `;
 
 Modal.Footer = styled.div`
@@ -47,4 +59,4 @@ Modal.Footer = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.black};
 `;
 
-export default Modal;
+export default Modal as ModalDiv;

@@ -1,16 +1,25 @@
 import { useState } from 'react';
-import { FontWeight, Text } from 'styled-typography';
+import { FontWeight, Heading, Text } from 'styled-typography';
 
 import useListAllBreedsQuery from 'api/DogAPI/ListAllBreeds/useListAllBreedsQuery';
 import { FullHeightContainer } from 'components/Container';
 import ButtonsGrid from './ButtonsGrid';
-import DogButton from './DogButton';
+import BreedButton from './BreedButton';
 import DogModal from './DogModal';
+import ViewTitle from 'components/ViewTitle';
 
-export default function DogsList() {
+const Message = ({ children }: { children: string }) => (
+  <FullHeightContainer>
+    <Text level={2} fontWeight={FontWeight.Medium}>
+      {children}
+    </Text>
+  </FullHeightContainer>
+);
+
+export default function BreedsList() {
   const [currentBreed, setCurrentBreed] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isLoading, data, isSuccess } = useListAllBreedsQuery();
+  const { isLoading, data, isSuccess, isError } = useListAllBreedsQuery();
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const breed = e.currentTarget.innerText.toLowerCase();
@@ -21,25 +30,26 @@ export default function DogsList() {
     setIsModalOpen(true);
   };
 
-  if (isLoading)
-    return (
-      <FullHeightContainer>
-        <Text level={2} fontWeight={FontWeight.Medium}>
-          Looking for dogs...
-        </Text>
-      </FullHeightContainer>
-    );
+  if (isLoading) return <Message>Looking for breeds...</Message>;
+
+  if (isError) return <Message>No breeds found ☹ </Message>;
 
   if (isSuccess)
     return (
       <>
+        <ViewTitle>
+          <Heading level={1}>Breeds list</Heading>
+          <Heading level={2} displayLevel={3} fontWeight={FontWeight.Light}>
+            Select a breed to view an example picture
+          </Heading>
+        </ViewTitle>
         <ButtonsGrid>
           {data?.message.map((breed) => (
-            <DogButton key={breed} title="Click me!" onClick={handleButtonClick}>
+            <BreedButton key={breed} title="Click me!" onClick={handleButtonClick}>
               <Text level={3} fontWeight={FontWeight.Bold} color="inherit">
                 {breed}
               </Text>
-            </DogButton>
+            </BreedButton>
           ))}
         </ButtonsGrid>
         <DogModal open={isModalOpen} breed={currentBreed} onClose={() => setIsModalOpen(false)} />

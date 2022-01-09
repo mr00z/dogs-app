@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { PrimaryButton } from 'components/Button';
 
-const DogButton = styled(PrimaryButton)`
+const BreedButton = styled(PrimaryButton)`
   padding: 1.5rem;
   margin: 1rem;
   width: 250px;
@@ -12,4 +12,4 @@ const DogButton = styled(PrimaryButton)`
   word-wrap: break-word;
 `;
 
-export default DogButton;
+export default BreedButton;

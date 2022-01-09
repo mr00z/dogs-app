@@ -6,8 +6,8 @@ import DogAPIClientProvider from 'api/DogAPI/DogAPIClientProvider';
 import { Main } from 'components/Main';
 import Navbar from 'components/Navbar';
 import { GlobalStyle } from 'theme/globalStyles';
-import { theme } from 'theme/theme';
-import DogsList from 'views/DogsList';
+import { theme } from 'theme';
+import BreedsList from 'views/BreedsList';
 
 const queryClient = new QueryClient();
 const dogApiClient = new DogAPIClient();
@@ -20,7 +20,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Navbar />
           <Main>
-            <DogsList />
+            <BreedsList />
           </Main>
         </QueryClientProvider>
       </DogAPIClientProvider>

@@ -1,4 +1,5 @@
-import { Heading } from 'styled-typography';
+import { useEffect, useState } from 'react';
+import { Heading, Text } from 'styled-typography';
 
 import { useGetBreedImageQuery } from 'api/DogAPI/GetBreedImage';
 import { ButtonGroup, PrimaryButton, SecondaryButton } from 'components/Button';
@@ -12,23 +13,35 @@ interface IDogModal extends IModal {
 }
 
 export default function DogModal({ open, breed, onClose }: IDogModal) {
-  const { data, refetch, isLoading } = useGetBreedImageQuery(breed);
+  const [currentImage, setCurrentImage] = useState('');
+
+  const { data, refetch, isLoading, isError } = useGetBreedImageQuery(breed, (data) => setCurrentImage(data?.message));
+
+  useEffect(() => {
+    if (data?.message !== currentImage) refetch();
+  }, [currentImage, data?.message, refetch]);
+
+  let textContent = '';
+
+  if (isLoading) textContent = 'Loading...';
+
+  if (isError) textContent = 'No picture found ☹';
+
+  const messageOnly = isLoading || isError;
+
   return (
     <Modal open={open}>
       <Modal.Content>
         <Modal.Header>
-          <Heading level={2} displayLevel={3}>
+          <Heading level={3} displayLevel={2}>
             {breed}
           </Heading>
         </Modal.Header>
-        <Modal.Body>
-          <Container>
-            {isLoading ? (
-              <FullHeightContainer>Loading...</FullHeightContainer>
-            ) : (
-              <DogImage src={data?.message} alt={breed} />
-            )}
-          </Container>
+        <Modal.Body messageTextOnly={messageOnly} loading={isLoading}>
+          <FullHeightContainer>
+            {/* @ts-ignore */}
+            {messageOnly ? <Text level={3}>{textContent}</Text> : <DogImage src={data?.message} alt={breed} />}
+          </FullHeightContainer>
         </Modal.Body>
         <Modal.Footer>
           <ButtonGroup>

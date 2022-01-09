@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const DogImage = styled.img`
   margin: 0.75rem;
-
   max-height: 55vh;
   width: auto;
 
