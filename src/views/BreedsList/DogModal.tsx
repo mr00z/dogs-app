@@ -3,7 +3,7 @@ import { Heading, Text } from 'styled-typography';
 
 import { useGetBreedImageQuery } from 'api/DogAPI/GetBreedImage';
 import { ButtonGroup, PrimaryButton, SecondaryButton } from 'components/Button';
-import { FullHeightContainer } from 'components/Container';
+import { Container } from 'components/Container';
 import { Modal, IModal } from 'components/Modal';
 
 import DogImage from './DogImage';
@@ -37,11 +37,10 @@ export default function DogModal({ open, breed, onClose }: IDogModal) {
             {breed}
           </Heading>
         </Modal.Header>
-        <Modal.Body messageTextOnly={messageOnly} loading={isLoading}>
-          <FullHeightContainer>
-            {/* @ts-ignore */}
+        <Modal.Body>
+          <Container>
             {messageOnly ? <Text level={3}>{textContent}</Text> : <DogImage src={data?.message} alt={breed} />}
-          </FullHeightContainer>
+          </Container>
         </Modal.Body>
         <Modal.Footer>
           <ButtonGroup>

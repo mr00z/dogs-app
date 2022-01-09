@@ -2,15 +2,10 @@ import styled, { DefaultTheme, StyledComponent } from 'styled-components';
 
 import { IModal } from '.';
 
-interface ModalBody {
-  messageTextOnly?: boolean;
-  loading?: boolean;
-}
-
 type ModalDiv = StyledComponent<'div', DefaultTheme, IModal, never> & {
   Header: StyledComponent<'div', DefaultTheme, {}, never>;
   Content: StyledComponent<'div', DefaultTheme, {}, never>;
-  Body: StyledComponent<'div', DefaultTheme, ModalBody, never>;
+  Body: StyledComponent<'div', DefaultTheme, {}, never>;
   Footer: StyledComponent<'div', DefaultTheme, {}, never>;
 };
 
@@ -37,7 +32,6 @@ Modal.Content = styled.div`
   margin: 15vh auto;
   border-radius: 10px;
   width: 70vw;
-  min-height: 30vh;
 
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     margin: 20vh auto;
@@ -45,14 +39,8 @@ Modal.Content = styled.div`
   }
 `;
 
-Modal.Body = styled.div<ModalBody>`
+Modal.Body = styled.div`
   padding: 0.75rem 0;
-  height: ${(props) => {
-    if (props.loading) return '30vh';
-    if (props.messageTextOnly) return '30vh';
-
-    return undefined;
-  }};
 `;
 
 Modal.Footer = styled.div`
